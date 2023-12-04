@@ -9,6 +9,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Tags\HasTags;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $content
+ * @property string $image
+ * @property string | null $seo_title
+ * @property string | null $seo_description
+ * @property int $blog_author_id
+ * @property string $created_at
+ * @property string $updated_at
+ */
 class Post extends Model
 {
     use HasFactory;
