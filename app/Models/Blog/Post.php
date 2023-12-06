@@ -17,6 +17,8 @@ use Spatie\Tags\HasTags;
  * @property string $image
  * @property string | null $seo_title
  * @property string | null $seo_description
+ * @property numeric $blog_category_id
+ * @property Author $author
  * @property int $blog_author_id
  * @property string $created_at
  * @property string $updated_at

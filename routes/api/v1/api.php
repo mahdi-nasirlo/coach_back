@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Blog\BlogPostController;
 use App\Http\Controllers\Blog\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,15 @@ Route::prefix('/blog')
     ->name('blog.')
     ->group(function () {
 
-        Route::get("/posts", [PostController::class, 'index']);
+        Route::prefix("/post")
+            ->name("post")
+            ->group(function () {
+
+                Route::get("/getPage", [BlogPostController::class, 'getPage']);
+                Route::post("/create", [BlogPostController::class, 'create']);
+                Route::get("/get/{post}", [BlogPostController::class, 'get']);
+                Route::post("/update/{post}", [BlogPostController::class, 'update']);
+
+            });
 
     });

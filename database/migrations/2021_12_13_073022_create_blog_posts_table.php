@@ -19,7 +19,7 @@ return new class() extends Migration
             $table->foreignId('blog_category_id')->nullable()->nullOnDelete();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->date('published_at')->nullable();
             $table->string('seo_title', 60)->nullable();
             $table->string('seo_description', 160)->nullable();
