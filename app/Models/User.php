@@ -13,6 +13,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @param string $password
+ */
 class User extends Authenticatable implements FilamentUser, HasTenants, MustVerifyEmail
 {
     use HasApiTokens;
@@ -44,7 +47,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
         return true;
     }
 
-    public function getTenants(Panel $panel): array | Collection
+    public function getTenants(Panel $panel): array|Collection
     {
         return Team::all();
     }

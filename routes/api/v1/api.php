@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\Blog\BlogPostController;
 use App\Http\Controllers\Blog\PostController;
 use Illuminate\Http\Request;
@@ -29,10 +30,26 @@ Route::prefix('/blog')
             ->group(function () {
 
                 Route::get("/getPage", [BlogPostController::class, 'getPage']);
-                Route::post("/create", [BlogPostController::class, 'create']);
                 Route::get("/get/{post}", [BlogPostController::class, 'get']);
-                Route::post("/update/{post}", [BlogPostController::class, 'update']);
+
+                Route::middleware("auth:sanctum")
+                    ->group(function () {
+
+                        Route::post("/create", [BlogPostController::class, 'create']);
+                        Route::post("/update/{post}", [BlogPostController::class, 'update']);
+
+                    });
 
             });
+
+    });
+
+
+Route::prefix('/auth')
+    ->name('auth.')
+    ->group(function () {
+
+        Route::post("/login", [AuthenticationController::class, 'Login']);
+        Route::post("/register", [AuthenticationController::class, 'Register']);
 
     });
