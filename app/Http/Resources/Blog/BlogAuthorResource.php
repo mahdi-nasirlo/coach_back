@@ -18,11 +18,12 @@ class BlogAuthorResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return  [
+        return [
             "name" => $this->name,
             "email" => $this->email,
             "photo" => $this->photo,
             "bio" => $this->bio,
+            "path" => '/blogs/author/owen-christ',
             "instagram_handle" => $this->instagram_handle,
             "telegram_handle" => $this->telegram_handle,
         ];
