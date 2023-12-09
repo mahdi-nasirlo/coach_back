@@ -1,0 +1,15 @@
+{
+    "laravel": {
+        "phpVersion": "8.2"
+    },
+    "disks": [
+        {
+            "name": "sqllite",
+            "mountTo": "database"
+        },
+        {
+            "name": "uploads",
+            "mountTo": "public/uploads"
+        }
+    ]
+}

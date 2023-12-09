@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AlwaysAcceptJson;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\EncryptCookies;
@@ -66,6 +67,8 @@ class Kernel extends HttpKernel
             EnsureFrontendRequestsAreStateful::class,
             ThrottleRequests::class . ':api',
             SubstituteBindings::class,
+            AlwaysAcceptJson::class,
+            Cors::class,
         ],
     ];
 
