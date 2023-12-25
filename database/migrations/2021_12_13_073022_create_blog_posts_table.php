@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class() extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,10 +14,13 @@ return new class() extends Migration
     {
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('blog_author_id')->nullable()->cascadeOnDelete();
-            $table->foreignId('blog_category_id')->nullable()->nullOnDelete();
+            $table->unsignedBigInteger('blog_author_id');
+            $table->foreign("blog_author_id")->references("id")->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger("blog_category_id")->nullable();
+            $table->foreign("blog_category_id")->references("id")->on("blog_categories")->cascadeOnUpdate();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->bigInteger("view")->default(0);
             $table->longText('content')->nullable();
             $table->date('published_at')->nullable();
             $table->string('seo_title', 60)->nullable();
