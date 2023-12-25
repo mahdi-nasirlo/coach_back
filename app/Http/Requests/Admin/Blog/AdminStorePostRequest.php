@@ -28,8 +28,7 @@ class AdminStorePostRequest extends FormRequest
             'content' => 'nullable|string',
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string|max:255',
-            'blog_category_id' => 'nullable|exists:blog_categories,id',
-            'author_id' => 'string|max:255',
+            'blog_category_id' => 'required|exists:blog_categories,id',
         ];
     }
 }
