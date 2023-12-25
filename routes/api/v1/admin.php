@@ -14,6 +14,10 @@ Route::prefix('/blog')
 
                 Route::get("/getPage", [AdminBlogPostController::class, "index"])->name("getPage");
 
+                Route::post("/create", [AdminBlogPostController::class, 'create']);
+
+                Route::post("/update/{post}", [AdminBlogPostController::class, 'update']);
+
             });
 
     });

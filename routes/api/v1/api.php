@@ -30,16 +30,7 @@ Route::prefix('/blog')
             ->group(function () {
 
                 Route::get("/getPage", [BlogPostController::class, 'getPage']);
-                Route::get("/admin/getPage");
                 Route::get("/get/{post}", [BlogPostController::class, 'get']);
-
-                Route::middleware("auth:sanctum")
-                    ->group(function () {
-
-                        Route::post("/create", [BlogPostController::class, 'create']);
-                        Route::post("/update/{post}", [BlogPostController::class, 'update']);
-
-                    });
 
             });
 

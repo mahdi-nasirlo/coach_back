@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Blog\AdminStorePostRequest;
+use App\Http\Requests\Admin\Blog\AdminUpdatePostRequest;
 use App\Http\Resources\Blog\BlogPostsResource;
 use App\Models\Blog\Post;
-use Illuminate\Http\Request;
 
 class AdminBlogPostController extends Controller
 {
@@ -16,35 +17,22 @@ class AdminBlogPostController extends Controller
         return BlogPostsResource::collection($posts);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create(AdminStorePostRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $post = Post::query()->create($validated);
+
+        return response()->json(['message' => 'Blog post created successfully'], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
+    public function update(AdminUpdatePostRequest $request, Post $post)
     {
-        //
+        $validated = $request->validated();
+
+        $post = $post->update($validated);
+
+        return response()->json(['message' => "successfully operation", 'success' => $post]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $post)
-    {
-        //
-    }
 }
