@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources\Blog;
 
-use App\Models\Blog\Author;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin Author
+ * @mixin User
  */
 class BlogAuthorResource extends JsonResource
 {
@@ -21,11 +21,11 @@ class BlogAuthorResource extends JsonResource
         return [
             "name" => $this->name,
             "email" => $this->email,
-            "photo" => $this->photo,
+            "image" => [
+                "src" => $this->image ?? "https://placehold.co/80x80/f5f5f5/f5f5f5",
+                "alt" => $this->name . "Avatar"
+            ],
             "bio" => $this->bio,
-            "path" => '/blogs/author/owen-christ',
-            "instagram_handle" => $this->instagram_handle,
-            "telegram_handle" => $this->telegram_handle,
         ];
     }
 }

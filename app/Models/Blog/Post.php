@@ -3,6 +3,7 @@
 namespace App\Models\Blog;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,31 +19,29 @@ use Spatie\Tags\HasTags;
  * @property string | null $seo_title
  * @property string | null $seo_description
  * @property numeric $blog_category_id
- * @property Author $author
+ * @property User $author
  * @property int $blog_author_id
  * @property string $created_at
  * @property string $updated_at
+ * @property Category $category
+ * @property int $view
  */
 class Post extends Model
 {
     use HasFactory;
     use HasTags;
 
-    /**
-     * @var string
-     */
     protected $table = 'blog_posts';
 
-    /**
-     * @var array<string, string>
-     */
+    protected $guarded = [];
+
     protected $casts = [
         'published_at' => 'date',
     ];
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(Author::class, 'blog_author_id');
+        return $this->belongsTo(User::class, 'blog_author_id');
     }
 
     public function category(): BelongsTo

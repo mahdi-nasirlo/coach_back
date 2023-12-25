@@ -15,6 +15,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @param string $password
+ * @property string $email
+ * @property string $image
+ * @property string $bio
+ * @property string $name
  */
 class User extends Authenticatable implements FilamentUser, HasTenants, MustVerifyEmail
 {

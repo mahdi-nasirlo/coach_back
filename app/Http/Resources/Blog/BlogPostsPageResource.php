@@ -21,15 +21,14 @@ class BlogPostsPageResource extends JsonResource
             "title" => $this->title,
             "path" => $this->slug,
             "excerpt" => $this->content,
-            "views" => 215,
+            "views" => $this->view,
             "postedAt" => "Nov 21, 2023",
             "image" => ["src" => '/images/blog/home-personal-finance-blog-01.jpg'],
-            "category" => [
-                "title" => 'business',
-                "slug" => 'business',
-                "path" => '/blogs/category/business'
-            ],
-
+            "category" => $this->category,
+//            "category" => $this->whenLoaded('category', fn() => [
+//                "title" => $this->whenNotNull($this->category->name),
+//                "slug" => $this->whenNotNull($this->category->slug),
+//            ]),
 //            "seo_title" => $this->seo_title,
 //            "seo_description" => $this->seo_description,
 //            "blog_category_id" => $this->blog_category_id,
