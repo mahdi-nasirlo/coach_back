@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Blog\BlogCategoryController;
 use App\Http\Controllers\Blog\BlogPostController;
 use App\Http\Controllers\Blog\PostController;
 use Illuminate\Http\Request;
@@ -33,6 +34,12 @@ Route::prefix('/blog')
                 Route::get("/get/{post}", [BlogPostController::class, 'get']);
 
             });
+
+        Route::group(["name" => "category", "prefix" => "category"], function () {
+
+            Route::get("/getAll", [BlogCategoryController::class, "getAll"])->name("getAll");
+
+        });
 
     });
 

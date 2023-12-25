@@ -8,16 +8,16 @@ Route::prefix('/blog')
     ->name('blog.')
     ->group(function () {
 
-        Route::prefix("/post")
-            ->name("post")
-            ->group(function () {
+        Route::group(["name" => "post", "prefix" => "/post"], function () {
 
-                Route::get("/getPage", [AdminBlogPostController::class, "index"])->name("getPage");
+            Route::get("/getPage", [AdminBlogPostController::class, "getPage"])->name("getPage");
 
-                Route::post("/create", [AdminBlogPostController::class, 'create']);
+            Route::get("/get/{post}", [AdminBlogPostController::class, "get"])->name("get");
 
-                Route::post("/update/{post}", [AdminBlogPostController::class, 'update']);
+            Route::post("/create", [AdminBlogPostController::class, 'create']);
 
-            });
+            Route::post("/update/{post}", [AdminBlogPostController::class, 'update']);
+
+        });
 
     });
