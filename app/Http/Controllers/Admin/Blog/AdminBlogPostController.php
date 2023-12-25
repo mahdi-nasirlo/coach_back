@@ -12,7 +12,9 @@ class AdminBlogPostController extends Controller
 {
     public function getPage()
     {
-        $posts = Post::with(["author"])->select(["id", "title", "slug", "image", "blog_author_id", "updated_at"])->paginate(5);
+        $posts = Post::with(["author:name,image"])
+            ->select(["id", "title", "view", "slug", "image", "blog_author_id", "updated_at"])
+            ->paginate(5);
 
         return BlogPostsPageResource::collection($posts);
     }
@@ -23,11 +25,17 @@ class AdminBlogPostController extends Controller
 
         $post = Post::query()->create($validated);
 
-        return response()->json(['status' => $post, 'message' => 'Blog post created successfully'], 201);
+        return response()->json([
+            'status' => true,
+            'message' => 'Blog post created successfully',
+            "data" => $post
+        ], 201);
     }
 
     public function get(Post $post)
     {
+        $post->update(["view" => $post->view + 1]);
+
         return new BlogPostsPageResource($post);
     }
 
