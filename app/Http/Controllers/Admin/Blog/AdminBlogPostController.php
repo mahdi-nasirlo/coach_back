@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Blog\AdminStorePostRequest;
 use App\Http\Requests\Admin\Blog\AdminUpdatePostRequest;
-use App\Http\Resources\Blog\BlogPostsResource;
+use App\Http\Resources\Blog\BlogPostsPageResource;
 use App\Models\Blog\Post;
 
 class AdminBlogPostController extends Controller
 {
-    public function index()
+    public function getPage()
     {
-        $posts = Post::with(["author"])->select(["title", "slug", "image", "blog_author_id", "updated_at"])->paginate(5);
+        $posts = Post::with(["author"])->select(["id", "title", "slug", "image", "blog_author_id", "updated_at"])->paginate(5);
 
-        return BlogPostsResource::collection($posts);
+        return BlogPostsPageResource::collection($posts);
     }
 
     public function create(AdminStorePostRequest $request)
@@ -23,7 +23,12 @@ class AdminBlogPostController extends Controller
 
         $post = Post::query()->create($validated);
 
-        return response()->json(['message' => 'Blog post created successfully'], 201);
+        return response()->json(['status' => $post, 'message' => 'Blog post created successfully'], 201);
+    }
+
+    public function get(Post $post)
+    {
+        return new BlogPostsPageResource($post);
     }
 
     public function update(AdminUpdatePostRequest $request, Post $post)
@@ -32,7 +37,7 @@ class AdminBlogPostController extends Controller
 
         $post = $post->update($validated);
 
-        return response()->json(['message' => "successfully operation", 'success' => $post]);
+        return response()->json(['status' => $post, 'message' => "successfully operation", 'success' => $post]);
     }
 
 }
