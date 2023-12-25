@@ -12,11 +12,13 @@ Route::prefix('/blog')
 
             Route::get("/getPage", [AdminBlogPostController::class, "getPage"])->name("getPage");
 
-            Route::get("/get/{post}", [AdminBlogPostController::class, "get"])->name("get");
+            Route::get("/get/{post:slug}", [AdminBlogPostController::class, "get"])->name("get");
 
-            Route::post("/create", [AdminBlogPostController::class, 'create']);
+            Route::post("/create", [AdminBlogPostController::class, 'create'])->name("create");
 
-            Route::post("/update/{post}", [AdminBlogPostController::class, 'update']);
+            Route::post("/update/{post}", [AdminBlogPostController::class, 'update'])->name("update");
+
+            Route::get("/delete/{post:slug}", [AdminBlogPostController::class, 'delete'])->name('delete');
 
         });
 

@@ -48,4 +48,14 @@ class AdminBlogPostController extends Controller
         return response()->json(['status' => $post, 'message' => "successfully operation", 'success' => $post]);
     }
 
+    public function delete(Post $post)
+    {
+        $post = $post->delete();
+
+        return response()->json([
+            'status' => $post,
+            'message' => "successfully"
+        ]);
+    }
+
 }
