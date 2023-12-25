@@ -11,9 +11,11 @@ class LoginAction
 {
     public function execute(LoginRequest $request)
     {
-        $user = User::query()->where('email', $request['email'])->firstOrFail();
+        $user = User::query()
+            ->where('email', $request['email'])
+            ->first();
 
-        if (!Hash::check($request['password'], $user->password)) {
+        if (!$user || !Hash::check($request['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
