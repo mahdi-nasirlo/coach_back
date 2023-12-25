@@ -11,7 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @mixin Post
  * @return array<string, mixed>
  */
-class BlogPostsResource extends JsonResource
+class BlogPostsPageResource extends JsonResource
 {
 
     public function toArray(Request $request): array
