@@ -4,6 +4,7 @@ namespace App\Models\Blog;
 
 use App\Models\Comment;
 use App\Models\User;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,11 +19,11 @@ use Spatie\Tags\HasTags;
  * @property string $image
  * @property string | null $seo_title
  * @property string | null $seo_description
- * @property numeric $blog_category_id
  * @property User $author
+ * @property int $blog_category_id
  * @property int $blog_author_id
  * @property string $created_at
- * @property string $updated_at
+ * @property DateTime $updated_at
  * @property Category $category
  * @property int $view
  */

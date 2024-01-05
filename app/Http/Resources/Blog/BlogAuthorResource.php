@@ -20,12 +20,12 @@ class BlogAuthorResource extends JsonResource
     {
         return [
             "name" => $this->name,
-            "email" => $this->email,
-            "image" => [
-                "src" => $this->image ?? "https://placehold.co/80x80/f5f5f5/f5f5f5",
+            "email" => $this->whenHas("email"),
+            "image" => $this->whenHas("name", [
+                "src" => "https://placehold.co/80X80/f1f5f9/696969",
                 "alt" => $this->name . "Avatar"
-            ],
-            "bio" => $this->bio,
+            ]),
+            "bio" => $this->whenHas("bio"),
         ];
     }
 }
