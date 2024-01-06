@@ -23,7 +23,9 @@ class BlogPostsPageResource extends JsonResource
             "excerpt" => $this->whenHas("content"),
             "views" => $this->view,
             "postedAt" => $this->whenHas("updated_at", $this->updated_at->format('M d, Y')),
-            "image" => ["src" => '/images/blog/home-personal-finance-blog-01.jpg'],
+            "image" => [
+                "src" => "https://placehold.co/1200X754/f1f5f9/696969"
+            ],
             "category" => $this->whenLoaded('category', fn() => [
                 "title" => $this->whenNotNull($this->category->name),
                 "slug" => $this->whenNotNull($this->category->slug),
