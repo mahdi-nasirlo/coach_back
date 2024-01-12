@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\Blog\BlogCategoryController;
 use App\Http\Controllers\Blog\BlogPostController;
 use App\Http\Controllers\Blog\PostController;
+use App\Http\Controllers\FileManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::prefix('/blog')
             ->group(function () {
 
                 Route::get("/getPage", [BlogPostController::class, 'getPage']);
-                Route::get("/get/{post}", [BlogPostController::class, 'get']);
+                Route::get("/get/{post:slug}", [BlogPostController::class, 'get']);
 
             });
 
@@ -52,3 +53,5 @@ Route::prefix('/auth')
         Route::post("/register", [AuthenticationController::class, 'Register']);
 
     });
+
+Route::get("/test", [FileManagementController::class, "fetch"]);

@@ -27,6 +27,7 @@ class AdminStorePostRequest extends FormRequest
             'slug' => 'required|string|unique:blog_posts,slug|max:255',
             'content' => 'nullable|string',
             'seo_title' => 'nullable|string|max:255',
+            'image' => 'nullable|string',
             'seo_description' => 'nullable|string|max:255',
             'blog_category_id' => 'nullable|exists:blog_categories,id',
         ];

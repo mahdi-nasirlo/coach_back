@@ -19,14 +19,16 @@ Route::prefix('/blog')
 
             Route::post("/update/{post}", [AdminBlogPostController::class, 'update'])->name("update");
 
-            Route::get("/delete/{post:slug}", [AdminBlogPostController::class, 'delete'])->name('delete');
+            Route::post("/delete/{post:slug}", [AdminBlogPostController::class, 'delete'])->name('delete');
 
         });
 
     });
 
-Route::group(["name" => "file-management.", "prefix" => "file-management"], function () {
+Route::group(["name" => "file-management.", "prefix" => "/file-management"], function () {
 
-    Route::Post("/upload", [FileManagementController::class, "store"])->name("upload");
+    Route::Post("", [FileManagementController::class, "store"])->name("upload");
+
+    Route::get("", [FileManagementController::class, "fetch"])->name("fetch");
 
 });

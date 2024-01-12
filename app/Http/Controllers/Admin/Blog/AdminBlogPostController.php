@@ -25,11 +25,37 @@ class AdminBlogPostController extends Controller
 
         $post = Post::query()->create($validated);
 
+//        $request->whenHas('image', function () use ($request, $post) {
+//
+//            $temporaryFile = TemporaryFile::query()->where("folder", $request->input("image"))->first();
+//
+//            if ($temporaryFile) {
+//
+//                $post
+//                    ->addMedia(storage_path('app/public' . $request->image . '/' . $temporaryFile->filename))
+//                    ->toMediaCollection("blog/post");
+//
+//                rmdir(storage_path('/app/public' . $request->image));
+//                $temporaryFile->delete();
+//            }
+//
+//        });
+
         return response()->json([
-            'status' => true,
+            'success' => true,
             'message' => 'Blog post created successfully',
             "data" => $post
         ], 201);
+    }
+
+    public function delete(Post $post)
+    {
+        $post = $post->delete();
+
+        return response()->json([
+            'success' => $post,
+            'message' => "successfully"
+        ]);
     }
 
     public function get(Post $post)
@@ -46,16 +72,6 @@ class AdminBlogPostController extends Controller
         $post = $post->update($validated);
 
         return response()->json(['status' => $post, 'message' => "successfully operation", 'success' => $post]);
-    }
-
-    public function delete(Post $post)
-    {
-        $post = $post->delete();
-
-        return response()->json([
-            'status' => $post,
-            'message' => "successfully"
-        ]);
     }
 
 }
