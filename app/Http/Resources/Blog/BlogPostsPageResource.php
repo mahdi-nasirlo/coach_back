@@ -20,11 +20,12 @@ class BlogPostsPageResource extends JsonResource
             "id" => $this->id,
             "title" => $this->title,
             "path" => $this->slug,
-            "excerpt" => $this->whenHas("content"),
+            "excerpt" => $this->whenHas("excerpt"),
+            "content" => $this->whenHas("content"),
             "views" => $this->view,
             "postedAt" => $this->whenHas("updated_at", $this->updated_at->format('M d, Y')),
             "image" => [
-                "src" => "https://placehold.co/1200X754/f1f5f9/696969"
+                "src" => $this->image ? env("APP_URL") . "/storage" . $this->image : "https://placehold.co/1200X756/f1f5f9/696969"
             ],
             "category" => $this->whenLoaded('category', fn() => [
                 "title" => $this->whenNotNull($this->category->name),

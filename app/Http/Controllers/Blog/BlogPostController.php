@@ -28,7 +28,7 @@ class BlogPostController extends Controller
                 "id",
                 "title",
                 "slug",
-                DB::raw('SUBSTR(content, 1, 100) as content'),
+                DB::raw('SUBSTR(content, 1, 100) as excerpt'),
                 "view",
                 "image",
                 "blog_author_id",
@@ -59,6 +59,12 @@ class BlogPostController extends Controller
 
     public function get(Post $post)
     {
+        $post->update([
+            'view' => $post->view + 1
+        ]);
+
+        $post->load(["author:id,name,bio", "category:name,slug"]);
+
         return new BlogPostsPageResource($post);
     }
 
