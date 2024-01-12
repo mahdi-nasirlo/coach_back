@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Tags\HasTags;
 
 /**
@@ -27,10 +29,11 @@ use Spatie\Tags\HasTags;
  * @property Category $category
  * @property int $view
  */
-class Post extends Model
+class Post extends Model implements HasMedia
 {
     use HasFactory;
     use HasTags;
+    use InteractsWithMedia;
 
     protected $table = 'blog_posts';
 
