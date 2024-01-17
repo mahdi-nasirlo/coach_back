@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Blog\Post;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
@@ -16,6 +18,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @param string $password
+ * @property numeric $id
  * @property string $email
  * @property string $image
  * @property string $bio
@@ -56,5 +59,10 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
     public function getTenants(Panel $panel): array|Collection
     {
         return Team::all();
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'blog_author_id');
     }
 }

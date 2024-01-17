@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Shop\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+/**
+ * @property User customer_id
+ */
 class Comment extends Model
 {
     use HasFactory;
@@ -20,9 +22,9 @@ class Comment extends Model
         'is_visible' => 'boolean',
     ];
 
-    public function customer(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class);
     }
 
     public function commentable(): MorphTo
