@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\Blog\BlogCategoryController;
 use App\Http\Controllers\Blog\BlogPostController;
 use App\Http\Controllers\Blog\PostController;
-use App\Http\Controllers\FileManagementController;
+use App\Http\Controllers\Meeting\CoachController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,4 +54,12 @@ Route::prefix('/auth')
 
     });
 
-Route::get("/test", [FileManagementController::class, "fetch"]);
+Route::prefix('coach')
+    ->name('coach.')
+    ->group(function () {
+
+        Route::post('/register', [CoachController::class, 'register'])
+            ->middleware('auth:sanctum')
+            ->name('register');
+
+    });

@@ -13,12 +13,13 @@ return new class extends Migration {
         Schema::create('coaches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('avatar');
             $table->string('user_name');
             $table->unsignedBigInteger('hourly_price');
+            $table->string('phone_number')->unique();
             $table->tinyInteger('status')->default(0);
             $table->foreignId('user_id')->constrained('users');
             $table->text('about_me');
+            $table->string('resume_file')->nullable();
             $table->text('resume')->nullable();
             $table->text('job_experience')->nullable();
             $table->text('education_record')->nullable();

@@ -37,7 +37,7 @@ class Post extends Model implements HasMedia
 
     protected $table = 'blog_posts';
 
-    protected $guarded = [];
+    protected $guarded = ['created_at', 'updated_at'];
 
     protected $casts = [
         'published_at' => 'date',

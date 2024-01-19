@@ -42,7 +42,7 @@ class AdminBlogPostController extends Controller
 //        });
 
         return response()->json([
-            'success' => true,
+            'status' => true,
             'message' => 'Blog post created successfully',
             "data" => $post
         ], 201);
@@ -53,7 +53,7 @@ class AdminBlogPostController extends Controller
         $post = $post->delete();
 
         return response()->json([
-            'success' => $post,
+            'status' => $post,
             'message' => "successfully"
         ]);
     }
