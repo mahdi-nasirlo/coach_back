@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Blog\Post;
+use App\Models\Meeting\Coach;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
@@ -23,6 +24,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $image
  * @property string $bio
  * @property string $name
+ * @property Coach $coach
  */
 class User extends Authenticatable implements FilamentUser, HasTenants, MustVerifyEmail
 {
@@ -64,5 +66,10 @@ class User extends Authenticatable implements FilamentUser, HasTenants, MustVeri
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'blog_author_id');
+    }
+
+    public function coach()
+    {
+        return $this->hasOne(Coach::class);
     }
 }

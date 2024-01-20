@@ -14,7 +14,7 @@ class CoachObserver
      */
     public function creating(Coach $coach): void
     {
-        $coach->user_id = auth()->id();
+        
         $coach->hourly_price = 100000;
         $coach->user_name = Uuid::generate(4);
 
