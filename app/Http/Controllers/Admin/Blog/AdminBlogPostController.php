@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Blog\AdminStorePostRequest;
 use App\Http\Requests\Admin\Blog\AdminUpdatePostRequest;
-use App\Http\Resources\Blog\BlogPostsPageResource;
+use App\Http\Resources\Blog\BlogPostsResource;
 use App\Models\Blog\Post;
 
 class AdminBlogPostController extends Controller
@@ -16,7 +16,7 @@ class AdminBlogPostController extends Controller
             ->select(["id", "title", "view", "slug", "image", "blog_author_id", "updated_at"])
             ->paginate(5);
 
-        return BlogPostsPageResource::collection($posts);
+        return BlogPostsResource::collection($posts);
     }
 
     public function create(AdminStorePostRequest $request)
@@ -62,7 +62,7 @@ class AdminBlogPostController extends Controller
     {
         $post->update(["view" => $post->view + 1]);
 
-        return new BlogPostsPageResource($post);
+        return new BlogPostsResource($post);
     }
 
     public function update(AdminUpdatePostRequest $request, Post $post)

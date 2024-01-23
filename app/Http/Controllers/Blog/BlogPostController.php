@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Blog\BlogPostsPageResource;
+use App\Http\Resources\Blog\BlogPostsResource;
 use App\Models\Blog\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -54,7 +54,7 @@ class BlogPostController extends Controller
             $posts = $query->get();
         }
 
-        return BlogPostsPageResource::collection($posts);
+        return BlogPostsResource::collection($posts);
     }
 
     public function get(Post $post)
@@ -65,7 +65,7 @@ class BlogPostController extends Controller
 
         $post->load(["author:id,name,bio", "category:name,slug"]);
 
-        return new BlogPostsPageResource($post);
+        return new BlogPostsResource($post);
     }
 
 }

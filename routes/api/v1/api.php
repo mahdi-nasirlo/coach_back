@@ -62,4 +62,6 @@ Route::prefix('coach')
             ->middleware('auth:sanctum')
             ->name('register');
 
+        Route::get('/getPage', [CoachController::class, 'index'])->name('getPage');
+
     });

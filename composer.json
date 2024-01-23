@@ -25,6 +25,7 @@
         "laravel/tinker": "^2.8",
         "rakutentech/laravel-request-docs": "^2.26",
         "spatie/laravel-medialibrary": "^10.15",
+        "spatie/laravel-query-builder": "^5.7",
         "squirephp/countries-en": "^3.3",
         "squirephp/currencies-en": "^3.3",
         "webpatser/laravel-uuid": "^4.0"
